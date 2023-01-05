@@ -4,6 +4,11 @@ on:
   push:
     branches: [ "main" ]
 
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -23,7 +28,7 @@ jobs:
     needs: build
     environment: 
       name: github-pages
-      name: ${{ steps.deployment.outputs.page_url }}
+      url: ${{ steps.deployment.outputs.page_url }}
     steps: 
       - name: Deploy github pages
         id: deployment
